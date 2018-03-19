@@ -1,6 +1,6 @@
 # WebTermJS
 
-**~ Developed by Christian Visintin**
+~ Developed by Christian Visintin
 
 #### Version 0.8
 
