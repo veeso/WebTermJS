@@ -1,6 +1,6 @@
-# WebTermJS
+#WebTermJS
 
-~ Developed by Christian Visintin
+**~ Developed by Christian Visintin**
 
 #### Version 0.8
 
@@ -53,6 +53,11 @@ In WebTermJS there are 4 kinds of commands divided in two categories:
     * ln [target] [link name] - Create symbolic link,
   * General Purpose Commands - Are the commands which are executed by shell_exec (that is all the commands which are not specified in any other category).
   * User-Defined Commands - (**Upcoming features**) - Are aliases defined by the user.
+
+### Blacklisting
+
+WebTermJS allows you to blacklist a command. If you use the webtermLib method setBlacklist($blacklist), where $blacklist is a simple array of commands
+(e.g. ["echo", "ssh", "ping", "ifconfig"]), all the commands defined in the array won't be allowed to be used and will return to the user "Error: command not found!"
 
 ## Text Editor
 
