@@ -67,6 +67,10 @@ class Webterm {
       $this->response = $this->ex_ln($command, $argv);
       break;
 
+      case "echo":
+      $this->response = $this->ex_echo($command, $argv);
+      break;
+
       //Edited file
       case "###SAVEFILE~":
       $this->response = $this->ex_SAVEFILE($argv);
@@ -170,6 +174,17 @@ class Webterm {
   }
 
   private function ex_ln($command, $argv) {
+    //Prepare arguments
+    chdir($this->path);
+    $command = $command . " ";
+    foreach($argv as $arg) {
+      $command = $command . " " . $arg;
+    }
+    $status = shell_exec($command);
+    return $this->buildResponse($this->path, $status);
+  }
+
+  private function ex_echo($command, $argv) {
     //Prepare arguments
     chdir($this->path);
     $command = $command . " ";
