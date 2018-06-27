@@ -2,22 +2,42 @@
 
 ~ Developed by Christian Visintin
 
-#### Version 0.8
+Version 0.9
 
 ## Introduction
 
-**WebTermJS** is a simple linux terminal for web. It supports all the commands which can be executed by shell_exec (PHP), in addition to other commands which are executed directly by the PHP interpreter and other (such as clear), which are executed by the javascript client.
-In order to work, WebTermJS requires PHP (at least PHP 5.3.0) and jQuery (at least 1.6).
+**WebTermJS** is a simple linux terminal for web. It supports all the commands which can be executed by shell_exec), in addition to other commands which are executed interpreted by PHP or NodeJS.
+In order to work, WebTermJS **requires NodeJS with express or PHP (at least PHP 5.3.0)** and jQuery (at least 1.6).
 
 ## Implementation
 
-In order to implement WebTermJS in your page, you have to get the source from source-min.
-Then you have to link webterm.js and webterm.css to your HTML page and set a variable webtermCommunicator to the web path to **webtermCom.php** (which **has to be the same of webtermLib.php**), which is set by default to  
+First of all you need to choose your backend between PHP and NodeJS:
+
+### NodeJS
+
+Go into app/, then type:
+
+```sh
+node appterm.js
+```
+
+Express will start listening on port 3000, indeed if you go to http://localhost:3000 you should be able to see the webterm index page.
+
+#### WebTermJS options
+
+Will be introduced in 1.0
+
+### PHP
+
+Get the source from webtermJS-PHP.
+Then you have to link webterm.js and webterm.css to your HTML page and **set webtermCommunicator in webterm.js** to the path to **webtermCom.php** (which **has to be the same of webtermLib.php**), which is set by default to:
 
 ```js
 var webtermCommunicator = "/php/webtermCom.php";
 ```
+
 Once you've done this, to add the terminal in your page embed this in your page (or make a script which embeds it for you)
+
 ```html
 <!-- WebTermJS here - Embed this into your page -->
 <div id="webtermJS">
@@ -26,12 +46,12 @@ Once you've done this, to add the terminal in your page embed this in your page 
   </script>
 </div>
 ```
+
 The arguments which have to be passed to the WebTerm constructor are "user", "hostname", "homepath".
 The ID must be webtermJS, while the class is optional and is a theme (see Themes section).
 Once you've done this, it should work.
 
 If you need to add passwords, permissions or other stuff, I suggest you to edit **webtermCom.php** to fit your purpose.
-
 
 ## Commands
 
@@ -48,7 +68,7 @@ In WebTermJS there are 4 kinds of commands divided in two categories:
   * Well-Defined Commands - They are the commands which are executed by the PHP interpreter without using shell_exec. They are made up of the following commands:
     * cd [path]
     * cat [path]
-    * rm [path] - Attention: It doesn't require any argument except the path. **It is always recursive, so if you set path to a directory, it will delete the entire directory and its content**.
+    * rm [path] - Attention: It doesn't require any argument except the path. **In PHP It is always recursive, so if you set path to a directory, it will delete the entire directory and its content**.
     * touch [path]
     * ln [target] [link name] - Create symbolic link,
   * General Purpose Commands - Are the commands which are executed by shell_exec (that is all the commands which are not specified in any other category).
@@ -65,6 +85,7 @@ Typing nano/edit/vi/vim/mcedit [filename] in the command line, the console will 
 If the file doesn't exist it will be created if possible.
 To edit the file, just write in the console what you want to write.
 When the text editor is enabled, only the following commands are enabled:
+
 * :q - Quit without saving the edited file
 * :q! - See :q
 * :w - Write changes to file.
@@ -73,11 +94,13 @@ When the text editor is enabled, only the following commands are enabled:
 ## Themes
 
 There are a few themes for the terminal which can be set as class of the webterm div
+
 ```html
   <div id="webtermJS" class="webtermJSxubuntu"/>
 ```
 
 Supported themes are:
+
 * webtermJSxubuntu - background-color: rgb(20,25,40)
 * webtermJSubuntu - background-color: rgb(48,10,36)
 
