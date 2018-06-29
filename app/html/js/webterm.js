@@ -161,7 +161,7 @@ function issueCommand(webterm, command) {
 
     //Resolve Command > the command is already solved by an internal function and does not need to be sent to back-end
     if(commandCanBeSolvedImmediately(webterm, argv)) {
-      if(argv[0] != "!")
+      if(argv[0].charAt(0) != "!")
       $("#webtermJScommand").val("");
       $("#webtermContent").animate({ scrollTop: $('#webtermContent').prop("scrollHeight")}, 300);
       return;
@@ -208,15 +208,7 @@ function commandCanBeSolvedImmediately(webterm, argv) {
     for(var i = 0; i < webterm.history.length; i++) {
       hist = hist + "\n" + i + "\t" + webterm.history[i];
     }
-    $('#webtermContent').append(hist + "\n");
-    solved = true;
-    break;
-
-    case "!":
-    if(argv[1] > webterm.history.length - 1) {
-      argv[1] = webterm.history.length - 1;
-    }
-    $("#webtermJScommand").val(webterm.history[argv[1]]);
+    $('#webtermContent').val($('#webtermContent').val() + hist + "\n");
     solved = true;
     break;
 
@@ -244,6 +236,16 @@ function commandCanBeSolvedImmediately(webterm, argv) {
     case "nano":
     openEditor(webterm, argv);
     solved = true;
+    break;
+
+    default:
+    if(argv[0].charAt(0) == '!') {
+      if(argv[1] > webterm.history.length - 1) {
+        argv[1] = webterm.history.length - 1;
+      }
+      $("#webtermJScommand").val(webterm.history[argv[0].substr(1)]);
+      solved = true;
+    }
     break;
 
   }

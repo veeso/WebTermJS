@@ -61,7 +61,7 @@ In WebTermJS there are 4 kinds of commands divided in two categories:
   * ImmediatelySolved Commands - Are the commands which are immediately executed by JavaScript, and are the following commands:
     * clear - Clear console
     * history - show history
-    * ! [history index] - insert into the command line the command with [history index] as index. Just try history to understand how it works.
+    * ![history index] - insert into the command line the command with [history index] as index. Just try history to understand how it works.
     * mcedit/vi/vim/nano/edit - It's not really an ImmediatelySolved command, indeed once issued it makes a request to the server using "cat" as command. It's used to open the text editor; see Text Editor section for details.
 
 * **Server-Side Commands**
